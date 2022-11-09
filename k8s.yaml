@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: msynbot.gnd-ranker
+  labels:
+    name: msynbot.gnd-ranker
+    # The toolforge=tool label will cause $HOME and other paths to be mounted from Toolforge
+    toolforge: tool
+spec:
+  schedule: "42 10 * * 4"
+  successfulJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            toolforge: tool
+        spec:
+          containers:
+          - name: gnd-ranker
+            image: docker-registry.tools.wmflabs.org/toolforge-python39-sssd-base:latest
+            resources:
+              requests:
+                memory: "3Gi"
+              limits:
+                memory: "3Gi"
+            env:
+            - name: PYTHONPATH
+              value: /data/project/shared/pywikibot/stable
+            - name: HOME
+              value: /data/project/msynbot
+            workingDir: /data/project/msynbot/pywikibot_tasks/gnd_ranker
+            command: [ venv/bin/python3 ]
+            args: [ main.py ]
+          restartPolicy: Never
