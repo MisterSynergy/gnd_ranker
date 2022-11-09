@@ -136,7 +136,7 @@ def normalize_ranking(qid:str) -> None:
         RANK_DEPRECATED : 0,
         RANK_NORMAL : 0,
         RANK_PREFERRED : 0
-    }    
+    }
     changed_claims = 0
 
     for claim in item.claims[PID_GND]:

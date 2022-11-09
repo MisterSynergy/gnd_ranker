@@ -53,7 +53,7 @@ def query_items_with_untagged_tns() -> pd.DataFrame:
     current_tn_values_in_wikidata = query_current_gnds_tagged_as_undifferentiated_in_wikidata()
     LOG.info(f'Found {current_tn_values_in_wikidata.shape[0]} GND identifiers in Wikidata that are marked as undifferentiated')
 
-    tns_from_dump = load_latest_tn_dump()   
+    tns_from_dump = load_latest_tn_dump()
     LOG.info(f'Found {tns_from_dump.shape[0]} Tn identifiers in latest dump')
 
     potential_tns_in_wd = current_gnd_values_in_wikidata.merge(
@@ -175,7 +175,7 @@ def query_incorrectly_tagged_as_incorrect() -> pd.DataFrame:
     current_incorrect_gnd_values_in_wikidata = query_current_incorrect_gnd_values_in_wikidata()
     LOG.info(f'Found {current_incorrect_gnd_values_in_wikidata.shape[0]} GND identifiers in Wikidata marked as incorrect')
 
-    valid_identifier_dump = load_latest_valid_identifier_dump()   
+    valid_identifier_dump = load_latest_valid_identifier_dump()
     LOG.info(f'Found {valid_identifier_dump.shape[0]} valid identifiers in latest dump')
 
     df = current_incorrect_gnd_values_in_wikidata.merge(
