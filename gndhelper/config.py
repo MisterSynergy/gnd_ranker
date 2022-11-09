@@ -30,8 +30,8 @@ USER_AGENT = f'{default_headers()["User-Agent"]} (Wikidata bot by' \
 GND_RDF_URL_PATTERN = 'https://d-nb.info/gnd/{gnd}'
 GND_RDF_FILE = 'https://d-nb.info/gnd/{gnd}/about/lds'
 WDQS_ENDPOINT = 'https://query.wikidata.org/sparql'
-WDQS_SLICE_LIMIT = 500000
-GND_SLEEP = 1  # seconds
+WDQS_SLICE_LIMIT = 500000  # int
+GND_SLEEP = 1  # int, seconds
 
 # log dataframes
 RESULTS_FOLDER = './output/'
@@ -41,7 +41,7 @@ RESULTS_FOLDER = './output/'
 TN_DUMP = 'https://persondata.toolforge.org/data/Tns.txt.gz'
 
 #VALID_GND_DUMP is managed by User:Wurgl; it is a list of valid GNDs extracted from a GND dump
-VALID_GND_DUMP = 'https://persondata.toolforge.org/data/GNDs.txt.gz'  
+VALID_GND_DUMP = 'https://persondata.toolforge.org/data/GNDs.txt.gz'
 
 #REDIRECT_DUMP is created locally with "gnd dump parser" by User:MisterSynergy
 REDIRECT_DUMP = './assets/redirects-latest.tsv'
@@ -52,4 +52,4 @@ REPO = SITE.data_repository()
 SIMULATE = False  # do not make any edits when True
 
 # botjobs config
-LIMIT = None  # items to process
+LIMIT = None  # int or None; items to process
