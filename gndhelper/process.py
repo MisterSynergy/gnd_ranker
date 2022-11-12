@@ -16,9 +16,11 @@ def process_items_with_untagged_redirects(df:pd.DataFrame) -> None:
         try:
             target = get_redirect_target(row.redirect)
         except RuntimeWarning:  # not a redirect then
+            LOG.info(f'Found {row.item} has GND "{row.redirect}" with rank {row.rank}; does not seem to be a redirect')
             continue
 
         if target == row.redirect:
+            LOG.info(f'Found {row.item} has GND "{row.redirect}" with rank {row.rank}; redirect to self')
             continue
 
         LOG.info(f'Found {row.item} has GND "{row.redirect}" with rank {row.rank}; redirect target: {target}')
