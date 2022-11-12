@@ -33,6 +33,11 @@ def process_items_with_untagged_redirects(df:pd.DataFrame) -> None:
             QID_REDIRECT,
             f'GND identifier {row.redirect} redirects to "{target}"'
         )
+
+        if target != row.target:  # redirect target in dump different from URL redirect target; ignore
+            LOG.info(f'Redirect target different in dump ({row.target}) and from URL ({target}); do not add redirect target')
+            continue
+
         add_redirect_target(
             row.item,
             target

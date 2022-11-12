@@ -21,9 +21,14 @@ def load_redirect_dump() -> pd.DataFrame:
     df = pd.read_csv(
         REDIRECT_DUMP,
         sep='\t',
-        names=[ 'redirect' ],
-        dtype={ 'redirect' : str },
-        usecols=[0]
+        names=[
+            'redirect',
+            'target'
+        ],
+        dtype={
+            'redirect' : str,
+            'target' : str
+        }
     )
 
     return df
