@@ -1,6 +1,7 @@
 import logging
 
 import pywikibot as pwb
+from pywikibot.exceptions import InvalidTitleError
 
 from .config import REPO, SIMULATE
 from .config import PID_GND, PID_DEPRECATION, RANK_PREFERRED, RANK_NORMAL, RANK_DEPRECATED
@@ -29,7 +30,11 @@ def raise_to_normal_rank(qid:str, gnd:str) -> None:
 
 
 def set_to_deprecated_rank(qid:str, gnd_to_deprecate:str) -> None:
-    item = pwb.ItemPage(REPO, qid)
+    try:
+        item = pwb.ItemPage(REPO, qid)
+    except InvalidTitleError as exception:  # when a lexeme or similar shows up
+        return
+
     item.get()
 
     if not item.claims or PID_GND not in item.claims:
