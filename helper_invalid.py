@@ -36,7 +36,7 @@ def main() -> None:
 * {df.loc[not_deprecated_filter].shape[0]} potentially invalid GNDs in Wikidata
 """)
 
-    with open('./output/invalid_issue.tsv', mode='w', encoding='utf8') as file_handle, open('./output/invalid_issue_wikitable.txt') as wt_handle:
+    with open('./output/invalid_issue.tsv', mode='w', encoding='utf8') as file_handle, open('./output/invalid_issue_wikitable.txt', mode='w', encoding='utf8') as wt_handle:
         wt_handle.write('{| class="wikitable"\n|-\n! hist !! item !! invalid GND\n')
         for i, row in enumerate(df.loc[not_deprecated_filter].itertuples(), start=1):
             if is_valid_gnd_identifier(row.gnd) is True:
