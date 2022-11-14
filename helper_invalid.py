@@ -36,19 +36,16 @@ def main() -> None:
 * {df.loc[not_deprecated_filter].shape[0]} potentially invalid GNDs in Wikidata
 """)
 
-    with open('./output/invalid_issue.tsv', mode='w', encoding='utf8') as file_handle:
+    with open('./output/invalid_issue.tsv', mode='w', encoding='utf8') as file_handle, open('./output/invalid_issue_wikitable.txt') as wt_handle:
+        wt_handle.write('{| class="wikitable"\n|-\n! hist !! item !! invalid GND\n')
         for i, row in enumerate(df.loc[not_deprecated_filter].itertuples(), start=1):
-            if i%100==0:
-                print(f'{strftime("%H:%M:%S")}: ({i}/{df.loc[not_deprecated_filter].shape[0]})')
-
-            gnd_is_valid = is_valid_gnd_identifier(row.gnd)
-
-            if gnd_is_valid is True:
+            if is_valid_gnd_identifier(row.gnd) is True:
                 continue
 
-            print(row.item, row.s, row.gnd, row.rank, gnd_is_valid)
-            file_handle.write(f'{row.item}\t{row.s}\t{row.gnd}\t{row.rank}\t{gnd_is_valid}\n')
-
+            print(i, row.item, row.gnd, row.rank)
+            file_handle.write(f'{row.item}\t{row.s}\t{row.gnd}\t{row.rank}\n')
+            wt_handle.write(f'|-\n| [https://www.wikidata.org/w/index.php?title={row.item}&action=history hist] || {{{{Q|{row.item}}}}} || [https://d-nb.info/gnd/{row.gnd} {row.gnd}]\n')
+        wt_handle.write('|}')
 
 if __name__=='__main__':
     main()
