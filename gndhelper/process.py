@@ -40,10 +40,11 @@ def process_items_with_untagged_redirects(df:pd.DataFrame) -> None:
             LOG.info(f'Redirect target different in dump ({row.target}) and from URL ({target}); do not add redirect target')
             continue
 
-        add_redirect_target(
-            row.item,
-            target
-        )
+        if row.rank != 'DeprecatedRank':  # do not add redirect target if the claim already had deprecated rank
+            add_redirect_target(
+                row.item,
+                target
+            )
 
         if LIMIT is not None and i >= LIMIT:
             break
