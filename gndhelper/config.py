@@ -31,7 +31,7 @@ GND_RDF_URL_PATTERN = 'https://d-nb.info/gnd/{gnd}'
 GND_RDF_FILE = 'https://d-nb.info/gnd/{gnd}/about/lds'
 WDQS_ENDPOINT = 'https://query.wikidata.org/sparql'
 WDQS_SLICE_LIMIT = 500000  # int
-GND_SLEEP = 1  # int, seconds
+GND_SLEEP = 2  # int, seconds
 
 # log dataframes
 RESULTS_FOLDER = './output/'

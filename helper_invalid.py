@@ -66,6 +66,8 @@ def main() -> None:
             print(i, row.item, row.gnd, row.rank, valid_dnb)
             file_handle.write(f'{row.item}\t{row.s}\t{row.gnd}\t{row.rank}\t{valid_dnb}\n')
             wt_handle.write(f'|-\n| [https://www.wikidata.org/w/index.php?title={row.item}&action=history hist] || {{{{Q|{row.item}}}}} || [https://d-nb.info/gnd/{row.gnd} {row.gnd}] || {dnb}\n')
+            sleep(GND_SLEEP)
+
         wt_handle.write('|}')
 
 if __name__=='__main__':
