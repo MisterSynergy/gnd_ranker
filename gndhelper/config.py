@@ -4,10 +4,10 @@ from requests.utils import default_headers
 # which jobs to run
 UNTAGGED_TN = True
 UNTAGGED_REDIRECTS = True
-UNTAGGED_INVALID = True
+UNTAGGED_INVALID = False
 INCORRECTLY_TN = True
 INCORRECTLY_REDIRECT = True
-INCORRECTLY_INVALID = True
+INCORRECTLY_INVALID = False
 NORMALIZE_RANKING = True
 
 # constants
